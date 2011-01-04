@@ -1,0 +1,1 @@
+A portable object rating application utilizing django-contentypes to easily associate ratings/like-dislike buttons with a django model object.
