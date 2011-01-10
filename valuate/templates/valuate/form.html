@@ -1,0 +1,6 @@
+{% csrf_token %}
+{% if not form.disabled %}
+{{ form.as_p }}
+{% endif %}
+<input type="submit" value="{{ form.submit_button_text }}" {% if form.disabled %} disabled = "True" {% endif %}/>
+</form>
