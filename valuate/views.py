@@ -10,17 +10,22 @@ from main.models import *
 
 #A temporary view
 def render_form(request):    
-    post = Post.objects.get_or_create(title = 'Test')[0]    
-    form = ValuationForm(obj = post)
+    post = Post.objects.get_or_create(title = 'Test Post')[0]    
+    form = ValuationForm(request, obj = post)
     form_html = render_to_string('valuate/form.html', {'form': form}, context_instance = RequestContext(request))    
     return HttpResponse(form_html)
 
 @csrf_protect
 @require_POST
 def submit(request):    
-    form = ValuationForm(request.POST)
+    form = ValuationForm(request)
     if form.is_valid():
-        valuation = form.save(request)
-        return HttpResponse('Valid Form')
-    return HttpResponse('Invalid Form')        
-    return HttpResponseRedirect(request.REQUEST.get('next', request.META.get('HTTP_REFERER', '/')))    
+        valuation = form.save()
+        redirect = valuation.get_absoulte_url()
+    else:        
+        form.clear()
+        redirect = '/'
+
+    return HttpResponseRedirect(request.REQUEST.get('next',
+                                                    request.META.get('HTTP_REFERER',
+                                                                     redirect)))

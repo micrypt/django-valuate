@@ -2,4 +2,6 @@
 syntax: glob
 *.pyc
 *~
-test_project/
+sample/*.sqlite
+sample/initial_.sqlite
+
