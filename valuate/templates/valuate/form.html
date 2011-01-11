@@ -1,6 +1,5 @@
-{% csrf_token %}
-{% if not form.disabled %}
+<form method="post" action="{% url valuate-submit %}">
 {{ form.as_p }}
-{% endif %}
-<input type="submit" value="{{ form.submit_button_text }}" {% if form.disabled %} disabled = "True" {% endif %}/>
+{% csrf_token %}
+<input type="submit"/>
 </form>

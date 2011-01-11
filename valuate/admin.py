@@ -1,10 +1,10 @@
 from django.contrib import admin
-from valuate.models import Rating, Like
+from valuate.models import Valuation
 
-class BaseValuateAdmin(admin.ModelAdmin):    
-    list_display = ('content_object', 'content_type', 'submit_date', 'value')
-    list_filter = ['content_type', 'submit_date']    
+class ValuationAdmin(admin.ModelAdmin):    
+    list_display = ('value', 'content_object', 'content_type', 'submit_date')
+    list_filter = ['value', 'content_type', 'submit_date']
+    search_fields = ['user__username', 'user__email', 'content_type__app_label', 'ip_address']
     date_hierarchy = 'submit_date'    
 
-admin.site.register(Rating, BaseValuateAdmin)
-admin.site.register(Like, BaseValuateAdmin)
+admin.site.register(Valuation, ValuationAdmin)
