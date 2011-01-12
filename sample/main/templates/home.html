@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
+{% load valuation %}
 {% block content %}
+
 {% for post in posts %}
     <h3>{{ post }}</h3>
+    {% render_valuation_form  post %}
     <hr/>
 {% endfor %}
 {% endblock %}

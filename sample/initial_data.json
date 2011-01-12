@@ -22,7 +22,7 @@
     "model": "auth.permission", 
     "fields": {
       "codename": "delete_logentry", 
-      "name": "Can delete log entry", 
+      "name": "Can delete mlog entry", 
       "content_type": 8
     }
   }, 
@@ -270,7 +270,7 @@
     }
   }, 
   {
-    "pk": 1, 
+    "pk": 2, 
     "model": "auth.user", 
     "fields": {
       "username": "test", 
@@ -279,36 +279,46 @@
       "is_active": true, 
       "is_superuser": true, 
       "is_staff": true, 
-      "last_login": "2011-01-10 19:03:30", 
+      "last_login": "2011-01-12 20:24:30", 
       "groups": [], 
       "user_permissions": [], 
-      "password": "sha1$819cf$98d37833801ea33ef1ebeff45ccbc5b6f4bb9f79", 
+      "password": "sha1$2b4e3$7d1ae087bbee739aa23a4ca1b48499b6671884e9", 
       "email": "test@example.com", 
-      "date_joined": "2011-01-09 14:30:39"
+      "date_joined": "2011-01-11 22:44:32"
     }
   }, 
   {
-    "pk": "4f908b0434fcfecc111255fd7ba1ddde", 
-    "model": "sessions.session", 
+    "pk": 3, 
+    "model": "auth.user", 
     "fields": {
-      "expire_date": "2011-01-23 14:30:43", 
-      "session_data": "ZDRmYzM4ZDE1MjE5OTZiOTQ2MTIyYmY2NTQ0OWJmMzIyMjIxNDgyNDqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n"
+      "username": "testuser", 
+      "first_name": "", 
+      "last_name": "", 
+      "is_active": true, 
+      "is_superuser": false, 
+      "is_staff": false, 
+      "last_login": "2011-01-12 19:47:57", 
+      "groups": [], 
+      "user_permissions": [], 
+      "password": "", 
+      "email": "test@test.com", 
+      "date_joined": "2011-01-12 19:47:57"
     }
   }, 
   {
-    "pk": "e6e0287f32bd3459267188de4c78faeb", 
+    "pk": "221da023a19bb94ad4ef217867d85d31", 
     "model": "sessions.session", 
     "fields": {
-      "expire_date": "2011-01-23 22:49:27", 
-      "session_data": "ZDRmYzM4ZDE1MjE5OTZiOTQ2MTIyYmY2NTQ0OWJmMzIyMjIxNDgyNDqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n"
+      "expire_date": "2011-01-26 20:24:30", 
+      "session_data": "YWMwMDcyMjI1NzlkNzE5Y2YzNjA0OTVlNTU4YTcyZTdkZjRiYTU5NjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAnUu\n"
     }
   }, 
   {
-    "pk": "a11cf63b608441741486d96391d2cd92", 
-    "model": "sessions.session", 
+    "pk": 1, 
+    "model": "sites.site", 
     "fields": {
-      "expire_date": "2011-01-24 19:03:30", 
-      "session_data": "ZDRmYzM4ZDE1MjE5OTZiOTQ2MTIyYmY2NTQ0OWJmMzIyMjIxNDgyNDqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAXUu\n"
+      "domain": "localhost:8000", 
+      "name": "localhost:8000"
     }
   }, 
   {
@@ -319,11 +329,10 @@
     }
   }, 
   {
-    "pk": 1, 
-    "model": "sites.site", 
+    "pk": 2, 
+    "model": "main.post", 
     "fields": {
-      "domain": "localhost:8000", 
-      "name": "localhost:8000"
+      "title": "Another Test Post"
     }
   }
 ]

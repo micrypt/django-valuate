@@ -1,0 +1,4 @@
+include README INSTALL
+recursive-include valuate *.py *.html *.css
+include docs/Makefile
+recursive-include docs/source *

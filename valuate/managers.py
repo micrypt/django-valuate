@@ -18,7 +18,7 @@ class ValuationManager(models.Manager):
                           object_pk = None):                    
         is_authenticated = request.user.is_authenticated()        
         q_session = Q(session=request.COOKIES.get('sessionid', ''))
-        q_user = Q(user=request.user) if is_authenticated else Q()                
+        q_user = Q(user=request.user) if is_authenticated else Q()
         if obj:
             valuations_for_obj = self.filter_for_obj(obj)
         else:

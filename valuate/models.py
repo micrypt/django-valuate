@@ -52,9 +52,16 @@ class Valuation(models.Model):
             
 
     def save(self, request=None, *args, **kwargs):        
-        if request:
-            self.session = request.COOKIES.get('sessionid', '')
-            self.ip_address = request.META.get('REMOTE_ADDR', '')
-            if request.user.is_authenticated():
-                self.user = request.user     
-        return super(Valuation, self).save(*args, **kwargs)
+        if request:                                                
+            sessionid = request.session.session_key
+            if sessionid:
+                self.ip_address = request.META.get('REMOTE_ADDR', '')
+                self.session = sessionid
+                if request.user.is_authenticated():
+                    self.user = request.user            
+                return super(Valuation, self).save(*args, **kwargs)
+        else:
+            return super(Valuation, self).save(*args, **kwargs)
+
+    class Meta:
+        unique_together = (('user', 'content_type', 'object_pk'), ('session', 'content_type', 'object_pk'))

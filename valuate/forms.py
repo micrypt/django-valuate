@@ -9,7 +9,7 @@ class ValuationForm(forms.ModelForm):
     
     def __init__(self, request, data=None, initial = {}, obj = None,
                  instance = None, *args, **kwargs):
-        self.request = request
+        self.request = self.process_request(request)
         if obj:
             ctype = CT.objects.get_for_model(obj)
             initial['content_type'] = ctype
@@ -40,6 +40,13 @@ class ValuationForm(forms.ModelForm):
                                  content_type=request.POST['content_type'],
                                  object_pk=request.POST['object_pk'])
 
+    def process_request(self,request):
+        if request.session.test_cookie_worked():
+            request.session.delete_test_cookie()
+        if not request.COOKIES.get('sessionid', None):
+            request.session.set_test_cookie()                        
+        return request
+    
     def save(self, *args, **kwargs):     
         valuation = super(ValuationForm, self).save(commit=False,
                                                     *args, **kwargs)

@@ -21,11 +21,11 @@ def submit(request):
     form = ValuationForm(request)
     if form.is_valid():
         valuation = form.save()
-        redirect = valuation.get_absoulte_url()
+        redirect = request.REQUEST.get('next',
+                                       request.META.get('HTTP_REFERER',
+                                                        valuation.get_absoulte_url()))
     else:        
         form.clear()
         redirect = '/'
 
-    return HttpResponseRedirect(request.REQUEST.get('next',
-                                                    request.META.get('HTTP_REFERER',
-                                                                     redirect)))
+    return HttpResponseRedirect(redirect)
