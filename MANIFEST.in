@@ -1,4 +1,3 @@
-include README INSTALL
+include AUTHORS README LICENCE
 recursive-include valuate *.py *.html *.css
-include docs/Makefile
-recursive-include docs/source *
+

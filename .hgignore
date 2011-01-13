@@ -3,5 +3,5 @@ syntax: glob
 *.pyc
 *~
 sample/*.sqlite
-sample/initial_.sqlite
-
+dist/
+django_valuate.egg-info

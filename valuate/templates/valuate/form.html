@@ -1,4 +1,4 @@
-<form method="post" action="{% url valuate-submit %}" >
+<form method="post" action="{% url valuate-submit %}" class="valuate-form" id="{{ form.get_id }}">
 {{ form.as_p }}
 {% csrf_token %}
 <input type="submit"/>

@@ -279,7 +279,7 @@
       "is_active": true, 
       "is_superuser": true, 
       "is_staff": true, 
-      "last_login": "2011-01-12 20:24:30", 
+      "last_login": "2011-01-13 22:02:09", 
       "groups": [], 
       "user_permissions": [], 
       "password": "sha1$2b4e3$7d1ae087bbee739aa23a4ca1b48499b6671884e9", 
@@ -306,14 +306,6 @@
     }
   }, 
   {
-    "pk": "221da023a19bb94ad4ef217867d85d31", 
-    "model": "sessions.session", 
-    "fields": {
-      "expire_date": "2011-01-26 20:24:30", 
-      "session_data": "YWMwMDcyMjI1NzlkNzE5Y2YzNjA0OTVlNTU4YTcyZTdkZjRiYTU5NjqAAn1xAShVEl9hdXRoX3Vz\nZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHED\nVQ1fYXV0aF91c2VyX2lkcQRLAnUu\n"
-    }
-  }, 
-  {
     "pk": 1, 
     "model": "sites.site", 
     "fields": {
@@ -325,14 +317,35 @@
     "pk": 1, 
     "model": "main.post", 
     "fields": {
-      "title": "Test"
+      "title": "Test Post 1"
     }
   }, 
   {
     "pk": 2, 
     "model": "main.post", 
     "fields": {
-      "title": "Another Test Post"
+      "title": "Test Post 1"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "main.post", 
+    "fields": {
+      "title": "Test Post 3"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "main.post", 
+    "fields": {
+      "title": "Test Post 4"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "main.post", 
+    "fields": {
+      "title": "Test Post 5"
     }
   }
 ]

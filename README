@@ -1,1 +1,56 @@
-A portable application to easily associate a user valuation (rating, like etc) to any object.
+Valuate
+=======
+A portable application to easily associate a user valuation (rating, like etc) 
+to any object, just on the basis of template tags. No configuration of existing 
+models and views required. 
+
+
+Installation
+============
+
+ - Run `python setup.py install`
+ - Include 'valuate' in your installed apps settings. 
+ - Ensure you have request context preprocessor added in the list of preprocessors
+   or pass request varible context to views. 
+   
+   
+Usage
+=====
+
+**Available settings:**
+`VALUATION_NAME`: Name for the type of valuation, will be visible in forms. 
+Eg: rating,like etc.  
+
+`VALUATION_CHOICES`: A list of choices which will be used as the choice set for users.  
+Each choice will be assigned an integer value, going from low to high.   
+Eg: ['low', 'medium', 'high'] => ((1, 'low'), (2, 'medium'), (3, 'high'))
+
+
+`VALUATION_TEMPLATE`: Name of a predefined template.  
+Currently available: rating, like.  
+
+Load the template tags: `{% load valuation %}`
+ 
+**Available tags:**
+
+{% render_valuation_form object %}  
+----------------------------------
+Renders the valuation form for the provided object.  
+Override template: 'valuate/form.html' for modifying the look.
+
+{% render_valuation_status object %}  
+------------------------------------
+Renders the status according to the score of various choices.   
+Override template: 'valuate/status.html' for modifying the look.
+
+{% get_valuation_score object %}
+--------------------------------
+Returns the average score of the object using the corresponding values
+of chioces.
+
+{% get_choice_count object 'choice' %}
+--------------------------------------
+Returns the score count for a perticular choice of an object. Choice
+should be provided with quotes (as string).
+
+

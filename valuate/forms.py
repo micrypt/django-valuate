@@ -4,20 +4,31 @@ from django.contrib.contenttypes.models import ContentType as CT
 from valuate.models import Valuation as V
 
 class ValuationForm(forms.ModelForm):
+    '''
+    The form for valuation model. Exclusively requires the `request`
+    context for checking previous object instances according to the
+    `current session` or `user` and also passing these variables to
+    the model save method while saving the form.
+    '''
+    
     content_type  = forms.ModelChoiceField(queryset=CT.objects.all(), widget=forms.HiddenInput)
     object_pk     = forms.CharField(widget=forms.HiddenInput)
     
     def __init__(self, request, data=None, initial = {}, obj = None,
                  instance = None, *args, **kwargs):
-        self.request = self.process_request(request)
-        if obj:
+        '''
+        Fills `content_type` and `object_pk` according to object and
+        processes `request` data
+        '''
+        self.request = self.process_request(request)        
+        if obj:            
             ctype = CT.objects.get_for_model(obj)
             initial['content_type'] = ctype
             initial['object_pk'] = obj.pk            
-            instance = self.get_instance(request, obj)
+            instance = self.get_instance(request, obj=obj)
             
         if request.POST:            
-            instance = self.get_instance_for_post(request)
+            instance = self.get_instance_by_post_data(request)
             data = request.POST
 
         return super(ValuationForm, self).__init__(data=data,
@@ -25,29 +36,55 @@ class ValuationForm(forms.ModelForm):
                                                    instance=instance,
                                                    *args, **kwargs)            
 
-    def clear(self):        
+    def clear(self):
+        '''
+        Clear the instance if an invalid form with instance is submitted. 
+        '''
         try:
             self.instance.delete()
         except AssertionError:
             pass
-            
+
+    def get_id(self):
+        '''
+        Returns the id for the html form.
+        '''
+        ctype = self.data.get('content_type', self.initial.get('content_type','').id)
+        object_pk = self.data.get('object_pk', self.initial.get('object_pk',''))
+        return "valuate_%s_%s" %(ctype, object_pk)
+    
     def get_instance(self, request, *args, **kwargs):
+        '''
+        Returns instance according to the object and request (user,
+        session). Needs either object or content_type, object_pk as
+        arguments as does `get_by_obj_client`
+        '''
         return  V.objects.get_by_obj_client(request,
                                             *args, **kwargs)        
 
-    def get_instance_for_post(self, request):
+    def get_instance_by_post_data(self, request):
+        '''
+        Returns instance according to the post data from request
+        '''
         return self.get_instance(request,
                                  content_type=request.POST['content_type'],
                                  object_pk=request.POST['object_pk'])
 
     def process_request(self,request):
+        '''
+        Prcesses the request to ensure if the session cookie is set.
+        TODO: Need to find a better alternative.
+        '''
         if request.session.test_cookie_worked():
             request.session.delete_test_cookie()
         if not request.COOKIES.get('sessionid', None):
             request.session.set_test_cookie()                        
         return request
     
-    def save(self, *args, **kwargs):     
+    def save(self, *args, **kwargs):
+        '''
+        Saves the model with the request variable. 
+        '''
         valuation = super(ValuationForm, self).save(commit=False,
                                                     *args, **kwargs)
         valuation.save(self.request)
