@@ -8,7 +8,7 @@ except:
 from setuptools import find_packages
 
 setup(name='django-valuate',
-      version='0.8',
+      version='1.0-beta',
       description='A valuation system pluggable to any object',
       long_description=open('README').read(),
       author='Rohan Jain',

@@ -45,6 +45,26 @@ Override template: 'valuate/form.html' for modifying the look.
 Renders the status according to the score of various choices.   
 Override template: 'valuate/status.html' for modifying the look.
 
+{% get_valuation_ajax_fields object 'as_name' %}
+----------------------------------------------
+Adds the fields as dictionary required for an ajax post request to
+the context with variable name `as_var` provided as a string.   
+Variables available:   
+For post request: 'content_type','object_pk', 'value' (to be selected
+by user, can have an initial value if user has already submitted once)
+'choices': dictionary of choices for user to provide the 'value' data.  
+'target': target for the request.   
+On a successfull request, true will be retuned.   
+If you are not using a popular javascript liberary, pass on a POST
+variable with name `ajax` and a `true` value.
+
+{% get_valuation_form object 'as_name' %}
+---------------------------------------
+Adds the valuation form to the context with variable name as_var
+provided as a string.  
+User `form_name.target` to access the target for the post request.
+
+
 {% get_valuation_score object %}
 --------------------------------
 Returns the average score of the object using the corresponding values

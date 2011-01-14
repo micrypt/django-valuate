@@ -3,5 +3,5 @@ import django.views.generic as gen_views
 from main.models import *
 
 urlpatterns = patterns('',
-    url(r'^post/$', 'valuate.views.submit', name = 'valuate-submit'),    
+    url(r'^submit/$', 'valuate.views.submit', name = 'valuate-submit'),    
 )

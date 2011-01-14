@@ -35,6 +35,7 @@ class ValuationSettings:
         self.choices_list = choices_list        
         self.choices = self.get_choices()        
         self.choices_dict = dict(zip(choices_list, range(1, len(choices_list)+1)))
+        self.choices_dict_rev = dict(zip(range(1, len(choices_list)+1), choices_list) )
                                  
     def __unicode__(self):
         return self.name

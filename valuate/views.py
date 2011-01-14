@@ -1,7 +1,6 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template.loader import render_to_string
 from django.utils import simplejson
-from django.template import RequestContext
 from django.views.decorators.csrf import csrf_protect
 from django.views.decorators.http import require_POST
 from django.contrib.contenttypes.models import ContentType as CT
