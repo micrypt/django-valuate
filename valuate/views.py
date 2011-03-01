@@ -13,9 +13,9 @@ def submit(request):
     The submissions of valuation forms will be handled here.
     Ajax supported untested.
     '''
-    form = ValuationForm(request)
-    success = False
-    if form.is_valid():
+    form = ValuationForm(request)    
+    success = False        
+    if form.is_valid():        
         valuation = form.save()
         success = True
         redirect = request.REQUEST.get('next',
