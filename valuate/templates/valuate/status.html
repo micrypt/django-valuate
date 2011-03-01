@@ -1,1 +1,4 @@
-{% for choice, count in status.items %}{{ choice.title }}: {{ count }} {% endfor %}
+{% regroup status|dictsort:"choice.value" by choice as choices %}
+{% for choice in choices %}
+    {{ choice.list|length }} <b>{{ choice.grouper }}{{ choice.list|length|pluralize }}</b><br/>
+{% endfor %}

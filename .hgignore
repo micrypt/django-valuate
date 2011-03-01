@@ -5,3 +5,5 @@ syntax: glob
 sample/*.sqlite
 dist/
 django_valuate.egg-info
+*migrations/
+*.swp

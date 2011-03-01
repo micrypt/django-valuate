@@ -59,7 +59,7 @@ MEDIA_URL = '/media/'
 
 # Absolute path to the directory that holds static files.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(ROOT_PATH, 'static') 
+STATIC_ROOT = os.path.join(ROOT_PATH, 'static-deploy') 
 
 # URL that handles the static files served from STATIC_ROOT.
 # Example: "http://media.lawrence.com/static/"
@@ -72,8 +72,8 @@ ADMIN_MEDIA_PREFIX = '/static/admin/'
 
 # A list of locations of additional static files
 STATICFILES_DIRS = (
-                    STATIC_ROOT,
-                    )
+                    os.path.join(ROOT_PATH, 'static'),
+                   )
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -127,6 +127,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'main',
     'valuate',
+#    'south',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -153,3 +154,4 @@ LOGGING = {
 }
 
 VALUATION_TEMPLATE = 'rating'
+SOUTH_TESTS_MIGRATE = False

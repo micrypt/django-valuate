@@ -4,9 +4,10 @@
 
 {% for post in posts %}
     <h3>{{ post }}</h3>
-    {% render_valuation_status post %}<br/>
-    Average Score: {% get_valuation_score post %}    
-    {% render_valuation_form  post %}
+    
+    Average Score: {% get_valuation_score post 'like-dislike' %}
+    <br/>{% render_valuation_status post 'like-dislike' %}
+    {% render_valuation_form  post 'like-dislike' %}
     <hr/>
 {% endfor %}
 {% endblock %}

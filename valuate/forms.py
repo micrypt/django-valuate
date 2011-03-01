@@ -1,7 +1,7 @@
 from django import forms
 from django.db.models import Q
 from django.contrib.contenttypes.models import ContentType as CT
-from valuate.models import Valuation as V
+from valuate.models import Valuation as V, ValuationType as VT, ValuationChoice as VC
 
 class ValuationForm(forms.ModelForm):
     '''
@@ -10,36 +10,42 @@ class ValuationForm(forms.ModelForm):
     `current session` or `user` and also passing these variables to
     the model save method while saving the form.
     '''
-    
-    content_type  = forms.ModelChoiceField(queryset=CT.objects.all(), widget=forms.HiddenInput)
-    object_pk     = forms.CharField(widget=forms.HiddenInput)
-    
-    def __init__(self, request, data=None, initial = {}, obj = None,
-                 instance = None, *args, **kwargs):
+
+    def __init__(self, request, data=None, initial={}, obj=None,
+                 instance=None, for_vtype=None, *args, **kwargs):
         '''
         Fills `content_type` and `object_pk` according to object and
         processes `request` data
-        '''
-        self.request = self.process_request(request)        
-        if obj:            
+        '''                    
+        self.request = self.process_request(request)
+        if obj:
+            vtype = VT.objects.get_type(for_vtype)
             ctype = CT.objects.get_for_model(obj)
             initial['content_type'] = ctype
-            initial['object_pk'] = obj.pk            
-            instance = self.get_instance(request, obj=obj)
+            initial['object_pk'] = obj.pk
+            initial['vtype'] = vtype
+            instance = self.get_instance(request, obj=obj,
+                                         for_vtype=for_vtype)            
             
         if request.POST:            
-            instance = self.get_instance_by_post_data(request)
+            instance = self.get_instance_by_post_data(request)            
             data = request.POST
-
-        return super(ValuationForm, self).__init__(data=data,
-                                                   initial=initial,
-                                                   instance=instance,
-                                                   *args, **kwargs)            
+        super(ValuationForm, self).__init__(data=data,
+                                            initial=initial,
+                                            instance=instance,
+                                            *args, **kwargs)
+    
+    content_type= forms.ModelChoiceField(queryset=CT.objects.all(),
+                                         widget=forms.HiddenInput)
+    object_pk   = forms.CharField(widget=forms.HiddenInput)
+    vtype=      forms.ModelChoiceField(queryset=VT.objects.all(),
+                                         widget=forms.HiddenInput)
 
     def clear(self):
         '''
         Clear the instance if an invalid form with instance is submitted. 
         '''
+        self.instance.delete()
         try:
             self.instance.delete()
         except AssertionError:
@@ -59,16 +65,21 @@ class ValuationForm(forms.ModelForm):
         session). Needs either object or content_type, object_pk as
         arguments as does `get_by_obj_client`
         '''
-        return  V.objects.get_by_obj_client(request,
-                                            *args, **kwargs)        
+        instance = V.objects.get_by_obj_client(request,
+                                               *args, **kwargs)        
+        return  instance
 
-    def get_instance_by_post_data(self, request):
+    def get_instance_by_post_data(self, request, *args, **kwargs):
         '''
-        Returns instance according to the post data from request
+        Returns instance according to the post data from request        
         '''
-        return self.get_instance(request,
-                                 content_type=request.POST['content_type'],
-                                 object_pk=request.POST['object_pk'])
+        vtype=request.POST['vtype']
+        instance = self.get_instance(request,
+                             content_type=request.POST['content_type'],
+                             object_pk=request.POST['object_pk'],
+                             vtype=request.POST['vtype'],
+                             *args, **kwargs)
+        return instance
 
     def process_request(self,request):
         '''
@@ -84,12 +95,12 @@ class ValuationForm(forms.ModelForm):
     def save(self, *args, **kwargs):
         '''
         Saves the model with the request variable. 
-        '''
+        '''        
         valuation = super(ValuationForm, self).save(commit=False,
                                                     *args, **kwargs)
-        valuation.save(self.request)
+        valuation.save(self.request)        
         return valuation
     
     class Meta:
         model = V
-        fields = ('content_type', 'object_pk', 'value')
+        fields = ('content_type', 'object_pk', 'choice')
