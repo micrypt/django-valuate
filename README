@@ -8,7 +8,6 @@ models and views required.
 Installation
 ============
 
- - Use django-dev/django 1.3 beta versions
  - Run `python setup.py install`
  - Include 'valuate' in your installed apps settings. 
  - Add `(r'^valuate/', include('valuate.urls'))` to your main urls.py. 
