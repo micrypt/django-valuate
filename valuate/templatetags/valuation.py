@@ -98,7 +98,8 @@ class ValuateGetNode(BaseValuateNode):
         request = context['request']    
         form = ValuationForm(request, obj=self.obj.resolve(context),
                              vtype=self.vtype) 
-        form.fields['choice'].queryset=self.vtype.choice_queryset()        
+        form.fields['choice'].queryset=self.vtype.choice_queryset()
+        form.fields['choice'].label=self.vtype.title
         return form
     methods['form'] = form
 
@@ -172,7 +173,8 @@ class ValuateRenderNode(BaseValuateNode):
         form = ValuationForm(context['request'],
                              obj=self.obj.resolve(context),
                              vtype=self.vtype)
-        form.fields['choice'].queryset=self.vtype.choice_queryset()        
+        form.fields['choice'].queryset=self.vtype.choice_queryset()
+        form.fields['choice'].label=self.vtype.title
         context['form']=form
         return render_to_string('valuate/form.html', context)
     methods['form']=form
