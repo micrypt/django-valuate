@@ -12,20 +12,19 @@ class ValuationForm(forms.ModelForm):
     '''
 
     def __init__(self, request, data=None, initial={}, obj=None,
-                 instance=None, for_vtype=None, *args, **kwargs):
+                 instance=None, vtype=None, *args, **kwargs):
         '''
         Fills `content_type` and `object_pk` according to object and
         processes `request` data
         '''                    
         self.request = self.process_request(request)
-        if obj:
-            vtype = VT.objects.get_type(for_vtype)
+        if obj:            
             ctype = CT.objects.get_for_model(obj)
             initial['content_type'] = ctype
             initial['object_pk'] = obj.pk
             initial['vtype'] = vtype
             instance = self.get_instance(request, obj=obj,
-                                         for_vtype=for_vtype)            
+                                         vtype=vtype)            
             
         if request.POST:            
             instance = self.get_instance_by_post_data(request)            
@@ -38,7 +37,7 @@ class ValuationForm(forms.ModelForm):
     content_type= forms.ModelChoiceField(queryset=CT.objects.all(),
                                          widget=forms.HiddenInput)
     object_pk   = forms.CharField(widget=forms.HiddenInput)
-    vtype=      forms.ModelChoiceField(queryset=VT.objects.all(),
+    vtype       = forms.ModelChoiceField(queryset=VT.objects.all(),
                                          widget=forms.HiddenInput)
 
     def clear(self):

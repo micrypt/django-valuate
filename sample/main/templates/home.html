@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 {% load valuation %}
 {% block content %}
-
-{% for post in posts %}
+{% for post in posts %}    
     <h3>{{ post }}</h3>
-    
-    Average Score: {% get_valuation_score post 'like-dislike' %}
-    <br/>{% render_valuation_status post 'like-dislike' %}
-    {% render_valuation_form  post 'like-dislike' %}
+    {% render_valuate form  of post for like-dislike %}
+    {% get_valuate score of post for like-dislike as avg_score %}    
+    Average Score: {{ avg_score }}
+    <br/>{% get_valuate ajax_fields of post for like-dislike as fields %}{{ fields }}
+    <br/>{% get_valuate choice_count of post for_choice like for like-dislike  %}
+    <br/>{% render_valuate status  of post  for like-dislike %}
+    {% render_valuate form of post %}
+    {% get_valuate score of post as avg_score %}        
+    Average Score: {{ avg_score }}
+    <br/>{% get_valuate ajax_fields of post as fields %}{{ fields }}
+    <br/>{% get_valuate choice_count of post for_choice medium  %}
+    <br/>{% render_valuate status  of post  %}
+    <br/>
     <hr/>
 {% endfor %}
 {% endblock %}

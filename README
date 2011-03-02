@@ -18,56 +18,6 @@ Installation
    
 Usage
 =====
-
-**Available settings:**  
-
-`DEFAULT_VALUATION_TYPE_ID`: The ID of default valuation type to be used in the project
-Load the template tags: `{% load valuation %}`
- 
-**Available tags:**  
-
-{% render_valuation_form object 'for_valuation_type' %}  
-------------------------------------------------------
-Renders the valuation form for the provided object.  
-Override template: 'valuate/form.html' for modifying the look.
-
-{% render_valuation_status object 'for_valuation_type' %}  
----------------------------------------------------------
-Renders the status according to the score of various choices.   
-Override template: 'valuate/status.html' for modifying the look.
-
-{% get_valuation_ajax_fields object 'as_name' 'for_valuation_type' %}
----------------------------------------------------------------------
-Adds the fields as dictionary required for an ajax post request to
-the context with variable name `as_var` provided as a string.   
-Variables available:   
-For post request: 'content_type','object_pk', 'value' (to be selected
-by user, can have an initial value if user has already submitted once)
-'choices': dictionary of choices for user to provide the 'value' data.  
-'target': target for the request.   
-On a successfull request, true will be retuned.   
-If you are not using a popular javascript liberary, pass on a POST
-variable with name `ajax` and a `true` value.
-
-{% get_valuation_form object 'as_name' 'for_valuation_type' %}
---------------------------------------------------------------
-Adds the valuation form to the context with variable name as_var
-provided as a string.  
-User `form_name.target` to access the target for the post request.
-
-
-{% get_valuation_score object 'for_valuation_type' %}
------------------------------------------------------
-Returns the average score of the object using the corresponding values
-of chioces.
-
-{% get_choice_count object 'choice' 'for_valuation_type' %}
------------------------------------------------------------
-Returns the score count for a perticular choice of an object. Choice
-should be provided with quotes (as string).
-
-Example
-=======
 Create a valuation type from admin site.   
 Let us say: 
 **Rating**
@@ -85,10 +35,53 @@ or
  - Like       1
  - Dislike    0
  
-If you have an object `post` to be associated a valuation (Let us say Rating)
-In the template: 
+ 
+**Available settings:**  
 
- - Render the form: `{% render_valuation_form  post 'Rating' %}`
- - Get Score: `{% get_valuation_score post 'Rating' %}`
+`DEFAULT_VALUATION_TYPE_ID`: The ID of default valuation type to be used in the project
+Load the template tags: `{% load valuation %}`
+ 
+**Available tags:**  
+
+{% render_valuate form  of object for valuation_type %}
+------------------------------------------------------
+Renders the valuation form for the provided object.  
+Override template: 'valuate/form.html' for modifying the look.
+
+{% render_valuate form of object for valuation_type %}
+---------------------------------------------------------
+Renders the status according to the score of various choices.   
+Override template: 'valuate/status.html' for modifying the look.
+
+{% get_valuate ajax_fields of object for valuation_type as variable %}
+---------------------------------------------------------------------
+Get the fields as dictionary required for an ajax post request in the context
+or directly.
+Variables available:
+For post request: 'content_type','object_pk', 'choice' (to be selected
+by user, can have an initial value if user has already submitted once)
+'choices': dictionary of choices for user to provide the 'value' data.
+'target': target for the request.
+'vtype'": the valuation type. 
+On a successfull request, true will be retuned. 
+If you are not using a popular javascript liberary, pass on a POST
+variable with name `ajax` and a `true` value.
+
+{% get_valuate form of object for valuation_type as variable %}
+--------------------------------------------------------------
+Gets the valuation form in context or directly.
+User `form_name.target` to access the target for the post request.
+
+{% get_valuate score of object for valuation_type as variable %}
+-----------------------------------------------------
+The average score of the object using the corresponding values
+of chioces.
+
+{% get_valuate choice_count of object for_chioce choice_name for valuation_type as variable %}
+----------------------------------------------------------------------------------------------
+Returns the score count for a perticular choice of an object. Choice
+should be provided with quotes (as string).
+
+*The `for valuation_type` and `as variable` are optional arguments*
 
 And Thats it!

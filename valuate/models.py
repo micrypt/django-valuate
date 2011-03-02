@@ -11,11 +11,15 @@ import settings
 
 class ValuationType(models.Model):
     title = models.CharField(_('title'), max_length=50)
-
+    slug = models.SlugField(_('slug'), max_length=50)
+    
     objects = ValuationTypeManager()
 
     def __unicode__(self):
         return self.title.title()
+
+    def choice_queryset(self):
+        return self.valuationchoice_set.all()
 
 class ValuationChoice(models.Model):
     name = models.CharField(_('choice'), max_length=50)
