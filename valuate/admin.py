@@ -8,6 +8,7 @@ class ValuationChoiceInline(admin.TabularInline):
 class ValuationTypeAdmin(admin.ModelAdmin):
     list_display=('title',)
     inlines = [ValuationChoiceInline]
+    prepopulated_fields = {"slug": ("title",)}
 
 class ValuationAdmin(admin.ModelAdmin):    
     list_display = ('choice', 'vtype', 'content_object', 'content_type', 'submit_date', 'user', 'session')
