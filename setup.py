@@ -8,7 +8,7 @@ except:
 from setuptools import find_packages
 
 setup(name='django-valuate',
-      version='1.0-beta-2',
+      version='1.0-beta-2.2',
       description='Easy plugging of user evaluation system to any django object.',
       long_description=open('README').read(),
       author='Rohan Jain',
