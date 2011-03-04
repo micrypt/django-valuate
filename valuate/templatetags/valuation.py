@@ -87,7 +87,10 @@ class ValuateGetNode(BaseValuateNode):
         '''
         avg_score = VOs.get_average_score(self.obj.resolve(context),
                                           vtype=self.vtype)
-        return round(avg_score, 2)    
+        try:
+            return round(avg_score, 2)
+        except TypeError:
+            return 0.0
     methods['score'] = score
 
     def form(self, context):
@@ -175,12 +178,12 @@ class ValuateRenderNode(BaseValuateNode):
                              vtype=self.vtype)
         form.fields['choice'].queryset=self.vtype.choice_queryset()
         form.fields['choice'].label=self.vtype.title
-        context['form']=form
+        context['valuate_form']=form
         return render_to_string('valuate/form.html', context)
     methods['form']=form
 
     def status(self, context):
-        context['status']=VOs.get_full_status(self.obj.resolve(context),
+        context['valuate_status']=VOs.get_full_status(self.obj.resolve(context),
                                               vtype=self.vtype)        
         return render_to_string('valuate/status.html', context)
     methods['status']=status

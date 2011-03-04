@@ -1,5 +1,5 @@
-<form method="post" action="{% url valuate-submit %}" class="valuate-form" id="{{ form.get_id }}">
-{{ form.as_p }}
+<form method="post" action="{% url valuate-submit %}" class="valuate-form" id="{{ valuate_form.get_id }}">
+{{ valuate_form.as_p }}
 {% csrf_token %}
 <input type="submit"/>
 </form>

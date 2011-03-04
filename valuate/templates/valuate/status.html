@@ -1,4 +1,4 @@
-{% regroup status|dictsort:"choice.value" by choice as choices %}
+{% regroup valuate_status|dictsort:"choice.value" by choice as choices %}
 {% for choice in choices %}
     {{ choice.list|length }} <b>{{ choice.grouper }}{{ choice.list|length|pluralize }}</b><br/>
 {% endfor %}
