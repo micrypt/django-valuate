@@ -33,8 +33,7 @@ class BaseValuateNode(template.Node):
         else:
             self.method = method
             if tokens[1]=='choice_count':                
-                if len(tokens) < 5 or not tokens[4]=='for_choice':
-                    print 'called'
+                if len(tokens) < 5 or not tokens[4]=='for_choice':                    
                     raise template.TemplateSyntaxError("Fourth argument in %r tag must be 'for_choice'" % tokens[0])
                 else:
                     self.choice=tokens[5]
