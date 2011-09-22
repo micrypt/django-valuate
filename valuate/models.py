@@ -62,9 +62,9 @@ class Valuation(models.Model):
                                       self.choice.vtype,
                                       self.choice)
 
-    def get_absoulte_url(self):
+    def get_absolute_url(self):
         try:
-            content_object_url = self.content_object.get_absoulte_url()
+            content_object_url = self.content_object.get_absolute_url()
         except:
             content_object_url = None
             

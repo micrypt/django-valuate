@@ -20,7 +20,7 @@ def submit(request):
         success = True
         redirect = request.REQUEST.get('next',
                                        request.META.get('HTTP_REFERER',
-                                                        valuation.get_absoulte_url()))        
+                                                        valuation.get_absolute_url()))        
     else:        
         form.clear()
         redirect = '/'

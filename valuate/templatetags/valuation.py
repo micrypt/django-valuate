@@ -126,7 +126,7 @@ class ValuateGetNode(BaseValuateNode):
         choices = vtype.choice_queryset()
         choice = ''
         target = reverse('valuate-submit')        
-        fields = {'chocies': choices, 'target':target,
+        fields = {'choices': choices, 'target':target,
                   'vtype':vtype}
                 
         initial_instance = VOs.get_by_obj_client(request, obj=obj,
