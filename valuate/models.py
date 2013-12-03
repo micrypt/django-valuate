@@ -65,13 +65,10 @@ class Valuation(models.Model):
     def get_absolute_url(self):
         try:
             content_object_url = self.content_object.get_absolute_url()
-        except:
-            content_object_url = None
-            
-        if content_object_url:            
             return content_object_url
-        else:
-            return '/'
+        except:
+            pass
+        return '/'
             
 
     def save(self, request=None, *args, **kwargs):
