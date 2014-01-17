@@ -5,10 +5,10 @@ from valuate.models import Valuation as V, ValuationType as VT, ValuationChoice 
 
 class ValuationForm(forms.ModelForm):
     '''
-    The form for valuation model. Exclusively requires the `request`
+    The form for the valuation model. It exclusively requires the `request`
     context for checking previous object instances according to the
-    `current session` or `user` and also passing these variables to
-    the model save method while saving the form.
+    `current session` or `user`, and also passing these variables to
+    the model's `save` method while saving the form.
     '''
 
     def __init__(self, request, data=None, initial={}, obj=None,
