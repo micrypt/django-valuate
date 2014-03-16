@@ -11,13 +11,13 @@ Installation
  - Run `python setup.py install`
  - Include 'valuate' in your installed apps settings. 
  - Add `(r'^valuate/', include('valuate.urls'))` to your main urls.py. 
- - Ensure you have request context preprocessor added in the list of preprocessors
+ - Ensure you have a request context preprocessor added in the list of preprocessors
    or pass request varible context to views. 
    
    
 Usage
 =====
-Create a valuation type from admin site.   
+Create a valuation type from the admin site.   
 Let us say: 
 **Rating**
 
@@ -34,7 +34,7 @@ or
  - Like       1
  - Dislike    0
  
- 
+
 **Available settings:**  
 
 `DEFAULT_VALUATION_TYPE_ID`: The ID of default valuation type to be used in the project
@@ -62,7 +62,7 @@ by user, can have an initial value if user has already submitted once)
 'choices': dictionary of choices for user to provide the 'value' data.
 'target': target for the request.
 'vtype'": the valuation type. 
-On a successfull request, true will be retuned. 
+On a successful request, true will be returned. 
 If you are not using a popular javascript liberary, pass on a POST
 variable with name `ajax` and a `true` value.
 
@@ -78,9 +78,9 @@ of chioces.
 
 {% get_valuate choice_count of object for_chioce choice_name for valuation_type as variable %}
 ----------------------------------------------------------------------------------------------
-Returns the score count for a perticular choice of an object. Choice
+Returns the score count for a particular choice of an object. Choice
 should be provided with quotes (as string).
 
 *The `for valuation_type` and `as variable` are optional arguments*
 
-And Thats it!
+And that's it!
