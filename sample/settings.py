@@ -1,4 +1,4 @@
-# Django settings for dtest project.
+# Django settings for django-valuate sample project.
 import os
 import sys
 
