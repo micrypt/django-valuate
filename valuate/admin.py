@@ -18,4 +18,3 @@ class ValuationAdmin(admin.ModelAdmin):
 
 admin.site.register(ValuationType, ValuationTypeAdmin)
 admin.site.register(Valuation, ValuationAdmin)
-
