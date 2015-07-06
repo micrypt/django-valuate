@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType as CT
 from django.db.models import Avg
-import settings
+from django.conf import settings
 Q = models.Q
 default_vtype_pk = getattr(settings,'DEFAULT_VALUATION_TYPE_PK', 1)
 
