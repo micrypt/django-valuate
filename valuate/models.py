@@ -7,7 +7,7 @@ from django.core import urlresolvers
 from django.contrib.auth.models import User
 from valuate.managers import ValuationManager, ValuationTypeManager
 
-import settings
+from django.conf import settings
 
 class ValuationType(models.Model):
     title = models.CharField(_('title'), max_length=50)
